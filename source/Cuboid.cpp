@@ -74,6 +74,17 @@ Cuboid Cuboid::Scale(double scalar)
     return *this;
 }
 
+Cuboid Cuboid::Scale(double scalar_x, double scalar_y, double scalar_z)
+{
+    for (int i = 0; i < SIZE; ++i)
+    {
+        vertices[i][0] = vertices[i][0] * scalar_x;
+        vertices[i][1] = vertices[i][1] * scalar_y;
+        vertices[i][2] = vertices[i][2] * scalar_z;
+    }
+    return *this;
+}
+
 std::ostream &operator<<(std::ostream &os, const Cuboid &c)
 {
     os << std::setprecision(10) << std::fixed;

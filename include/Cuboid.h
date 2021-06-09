@@ -92,6 +92,16 @@ public:
     */
     Cuboid Scale(double scalar);
 
+    /** @fn  Cuboid Scale(double scalar_x, double scalar_y, double scalar_z)
+    *   @brief Scale cuboid
+    *   
+    *   Each vertice is multiplied by passed
+    *   @param scalar_xyz 
+    * 
+    *   Which leds to increase or decrease of it's size.
+    */
+    Cuboid Scale(double scalar_x, double scalar_y, double scalar_z);
+
     /** @fn  void Side_length() const
     *   @brief Check length of cuboid sides
     *   
