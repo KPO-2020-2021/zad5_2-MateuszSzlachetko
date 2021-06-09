@@ -331,7 +331,7 @@ bool Scene::Add_obstacle()
 {
     std::cout << "Choose object type" << std::endl;
     std::cout << "1.\t Plateau" << std::endl;
-    std::cout << "2.\t ---" << std::endl;
+    std::cout << "2.\t Round Mountain" << std::endl;
     std::cout << "3.\t ---" << std::endl;
     std::cout << std::endl;
 
@@ -346,44 +346,79 @@ bool Scene::Add_obstacle()
         std::cerr << "Invalid object type" << std::endl;
         return false;
     }
-
-    double Length, Width, Height;
+    double Radius, Length, Width, Height;
     int colour;
-
-    std::cout << "Insert init values" << std::endl;
-    std::cout << "\t Length: ";
-    std::cin >> Length;
-    std::cout << "\t Width: ";
-    std::cin >> Width;
-    std::cout << "\t Height: ";
-    std::cin >> Height;
-    std::cout << "\t Colour: ";
-    std::cin >> colour;
-    std::cout << std::endl;
-
-    if ((Length <= 0 || Width <= 0 || Height <= 0) || std::cin.fail())
-    {
-        std::cin.clear();
-        std::cin.ignore(1000, '\n');
-        std::cerr << "Invalid init parameters" << std::endl;
-        return false;
-    }
-
     double x, y, orientation_angle;
 
-    std::cout << "Insert init position" << std::endl;
-    std::cout << "\t X- coordinate: ";
-    std::cin >> x;
-    std::cout << "\t Y- coordinate: ";
-    std::cin >> y;
-    std::cout << "\t Orientation angle: ";
-    std::cin >> orientation_angle;
-    std::cout << std::endl;
-
-    if (std::cin.fail())
+    if (Object_type == 1)
     {
-        std::cin.clear();
-        std::cin.ignore(1000, '\n');
+
+        std::cout << "Insert init values" << std::endl;
+        std::cout << "\t Length: ";
+        std::cin >> Length;
+        std::cout << "\t Width: ";
+        std::cin >> Width;
+        std::cout << "\t Height: ";
+        std::cin >> Height;
+        std::cout << "\t Colour: ";
+        std::cin >> colour;
+        std::cout << std::endl;
+
+        if ((Length <= 0 || Width <= 0 || Height <= 0) || std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            std::cerr << "Invalid init parameters" << std::endl;
+            return false;
+        }
+
+        std::cout << "Insert init position" << std::endl;
+        std::cout << "\t X- coordinate: ";
+        std::cin >> x;
+        std::cout << "\t Y- coordinate: ";
+        std::cin >> y;
+        std::cout << "\t Orientation angle: ";
+        std::cin >> orientation_angle;
+        std::cout << std::endl;
+
+        if (std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+        }
+    }
+
+    if (Object_type == 2)
+    {
+        std::cout << "Insert init values" << std::endl;
+        std::cout << "\t Radius: ";
+        std::cin >> Radius;
+        std::cout << "\t Height: ";
+        std::cin >> Height;
+        std::cout << "\t Colour: ";
+        std::cin >> colour;
+        std::cout << std::endl;
+
+        if ((Radius <= 0 || Height <= 0) || std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            std::cerr << "Invalid init parameters" << std::endl;
+            return false;
+        }
+
+        std::cout << "Insert init position" << std::endl;
+        std::cout << "\t X- coordinate: ";
+        std::cin >> x;
+        std::cout << "\t Y- coordinate: ";
+        std::cin >> y;
+        std::cout << std::endl;
+
+        if (std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+        }
     }
 
     switch (Object_type)
@@ -394,6 +429,19 @@ bool Scene::Add_obstacle()
         plateau.Set_in_scene(x, y, orientation_angle);
 
         Obstacles.push_back(std::make_shared<Plateau>(plateau));
+
+        std::list<std::shared_ptr<SceneObject>>::iterator i;
+        i = Obstacles.end();
+        --i;
+        (*i)->Add_files_names(Link, colour);
+        break;
+    }
+    case 2:
+    {
+        RoundMountain rm(Radius, Height);
+        rm.Set_in_scene(x, y);
+
+        Obstacles.push_back(std::make_shared<RoundMountain>(rm));
 
         std::list<std::shared_ptr<SceneObject>>::iterator i;
         i = Obstacles.end();

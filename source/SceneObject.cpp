@@ -33,7 +33,7 @@ std::string SceneObject::Get_file_path() const
 
 Vector3D SceneObject::Get_position() const
 {
-    return Vector3D();
+    return position;
 }
 
 std::string SceneObject::Get_typeID() const

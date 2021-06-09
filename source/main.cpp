@@ -8,7 +8,7 @@ int main()
 {
     system("clear");
 
-    // Plateau test(100, 50, 30);
+    // RoundMountain test(20, 100);
 
     // PzG::LaczeDoGNUPlota Lacze;
     // Lacze.DodajNazwePliku(test.Get_file_path().c_str())
@@ -21,12 +21,14 @@ int main()
     //     .ZmienKolor(5);
     // Lacze.Inicjalizuj();
     // Lacze.ZmienTrybRys(PzG::TR_3D);
-    // Lacze.UstawZakresX(-200, 200);
-    // Lacze.UstawZakresY(-200, 200);
-    // Lacze.UstawZakresZ(-100, 120);
+    // Lacze.UstawZakresX(-40, 40);
+    // Lacze.UstawZakresY(-40, 40);
+    // Lacze.UstawZakresZ(-30, 120);
     // Lacze.UstawRotacjeXZ(64, 65);
 
     // Lacze.Rysuj();
+    // char a;
+    // std::cin >> a;
     // std::this_thread::sleep_for(std::chrono::nanoseconds(1000000000));
 
     // test.Set_in_scene(50, 50, 25);

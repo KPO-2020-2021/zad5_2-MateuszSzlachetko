@@ -41,11 +41,6 @@ std::string Plateau::Get_file_path() const
     return std::string(File_path);
 }
 
-Vector3D Plateau::Get_position() const
-{
-    return position;
-}
-
 std::string Plateau::Get_typeID() const
 {
     return std::string(" Plateau ID :" + std::to_string(ID));
