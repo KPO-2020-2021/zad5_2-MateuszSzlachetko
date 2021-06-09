@@ -55,7 +55,7 @@ int main()
             std::cin >> option;
             //system("clear");
 
-            if (option != 'a' && option != 'c' && option != 'r' && option != 'm' && option != 'q' && option != 'd' && option != 'l')
+            if (option != 'e' && option != 'a' && option != 'c' && option != 'r' && option != 'm' && option != 'q' && option != 'd' && option != 'l')
             {
                 std::cerr << "[ERROR] Invalid menu argument" << std::endl;
                 option = ' ';
@@ -108,6 +108,11 @@ int main()
             case 'a':
                 scene_3D.Add_obstacle();
                 break;
+            case 'e':
+                std::cout << "Choose obstacle" << std::endl;
+                //wyświetlić listę
+                scene_3D.Remove_obstacle(i);
+                break;
             default:
                 break;
             }
@@ -126,6 +131,7 @@ void Display_menu()
     std::cout << " l-round route from modification" << std::endl;
     std::cout << "--------------------------------" << std::endl;
     std::cout << " a-add obstacle" << std::endl;
+    std::cout << " e-remove obstacle" << std::endl;
     std::cout << " m-show menu" << std::endl
               << std::endl;
     std::cout << " q-quit" << std::endl;

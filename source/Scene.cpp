@@ -308,3 +308,114 @@ bool Scene::Round_route(double radius)
 
     return true;
 }
+
+bool Scene::Add_obstacle()
+{
+    std::cout << "Choose object type" << std::endl;
+    std::cout << "1.\t Plateau" << std::endl;
+    std::cout << "2.\t ---" << std::endl;
+    std::cout << "3.\t ---" << std::endl;
+    std::cout << std::endl;
+
+    int Object_type = 0;
+
+    std::cin >> Object_type;
+
+    if ((Object_type != 1 && Object_type != 2 && Object_type != 3) || std::cin.fail())
+    {
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+        std::cerr << "Invalid object type" << std::endl;
+        return false;
+    }
+
+    double Length, Width, Height;
+    int colour;
+
+    std::cout << "Insert init values" << std::endl;
+    std::cout << "\t Length: ";
+    std::cin >> Length;
+    std::cout << "\t Width: ";
+    std::cin >> Width;
+    std::cout << "\t Height: ";
+    std::cin >> Height;
+    std::cout << "\t Colour: ";
+    std::cin >> colour;
+    std::cout << std::endl;
+
+    if ((Length <= 0 || Width <= 0 || Height <= 0) || std::cin.fail())
+    {
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+        std::cerr << "Invalid init parameters" << std::endl;
+        return false;
+    }
+
+    double x, y, orientation_angle;
+
+    std::cout << "Insert init position" << std::endl;
+    std::cout << "\t X- coordinate: ";
+    std::cin >> x;
+    std::cout << "\t Y- coordinate: ";
+    std::cin >> y;
+    std::cout << "\t Orientation angle: ";
+    std::cin >> orientation_angle;
+    std::cout << std::endl;
+
+    if (std::cin.fail())
+    {
+        std::cin.clear();
+        std::cin.ignore(1000, '\n');
+    }
+
+    switch (Object_type)
+    {
+    case 1:
+    {
+        Plateau plateau(Length, Width, Height);
+        plateau.Set_in_scene(x, y, orientation_angle);
+
+        Obstacles.push_back(std::make_shared<Plateau>(plateau));
+
+        std::list<std::shared_ptr<SceneObject>>::iterator i;
+        i = Obstacles.end();
+        --i;
+        (*i)->Add_files_names(Link, colour);
+        break;
+    }
+    default:
+        break;
+    }
+
+    Draw();
+    return true;
+}
+
+bool Scene::Remove_obstacle(int index)
+{
+    if (index < 0 || index > Obstacles.size() - 1)
+    {
+        std::cerr << "Index out of range" << std::endl;
+        return false;
+    }
+
+    if (Obstacles.empty())
+    {
+        std::cerr << "Obstacles list is empty,no element to delete" << std::endl;
+        return false;
+    }
+
+    std::list<std::shared_ptr<SceneObject>>::iterator i;
+
+    i = Obstacles.begin();
+
+    for (int j = 0; j < index; i++, j++)
+        ;
+
+    (*i)->Remove_files_names(Link);
+    Obstacles.remove(*i);
+
+    Draw();
+
+    return true;
+}

@@ -21,7 +21,6 @@ protected:
 
 public:
     SceneObject();
-    ~SceneObject();
 
     bool Move(Matrix3x3 &rotation_matrix, Vector3D translation_vector);
 

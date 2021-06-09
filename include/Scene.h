@@ -4,10 +4,12 @@
 /** @file
  */
 
+#include "Plateau.h"
 #include "Drone.h"
-#include "lacze_do_gnuplota.hh"
 #include <chrono>
 #include <thread>
+#include <list>
+#include <memory>
 
 /** @class Scene
  * 
@@ -23,11 +25,17 @@ private:
 
     PzG::LaczeDoGNUPlota Link;
 
+    std::list<std::shared_ptr<SceneObject>> Obstacles;
+
     std::string surface;
 
     void Draw_surface(int x_min, int x_max, int y_min, int y_max);
 
 public:
+    bool Add_obstacle();
+
+    bool Remove_obstacle(int index);
+
     /** @fn  Scene()
     *   @brief Default constructor
     *   

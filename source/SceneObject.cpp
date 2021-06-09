@@ -12,11 +12,6 @@ SceneObject::SceneObject()
     Total_scene_objects++;
 }
 
-SceneObject::~SceneObject()
-{
-    //remove(File_path.c_str());
-}
-
 bool SceneObject::Move(Matrix3x3 &rotation_matrix, Vector3D translation_vector)
 {
     // Since they won't move during the animation, passed values overwrite pervious position
@@ -54,6 +49,6 @@ bool SceneObject::Add_files_names(PzG::LaczeDoGNUPlota &Link, int colour)
 bool SceneObject::Remove_files_names(PzG::LaczeDoGNUPlota &Link)
 {
     Link.UsunNazwePliku(File_path.c_str());
-
+    remove(File_path.c_str());
     return true;
 }
