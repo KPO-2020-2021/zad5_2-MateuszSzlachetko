@@ -18,6 +18,8 @@ public:
 
     std::string Get_file_path() const override;
 
+    Vector3D Get_position() const override;
+
     std::string Get_typeID() const override;
 };
 

@@ -55,7 +55,7 @@ int main()
             std::cin >> option;
             //system("clear");
 
-            if (option != 'e' && option != 'a' && option != 'c' && option != 'r' && option != 'm' && option != 'q' && option != 'd' && option != 'l')
+            if (option != 'p' && option != 'e' && option != 'a' && option != 'c' && option != 'r' && option != 'm' && option != 'q' && option != 'd' && option != 'l')
             {
                 std::cerr << "[ERROR] Invalid menu argument" << std::endl;
                 option = ' ';
@@ -110,8 +110,21 @@ int main()
                 break;
             case 'e':
                 std::cout << "Choose obstacle" << std::endl;
-                //wyświetlić listę
+                if (!scene_3D.Print_list_of_obstacles())
+                {
+                    break;
+                }
+                std::cout << std::endl;
+                std::cin >> i;
+                if (std::cin.fail())
+                {
+                    throw std::invalid_argument("Wrong index passed");
+                }
                 scene_3D.Remove_obstacle(i);
+                i = 0;
+                break;
+            case 'p':
+                scene_3D.Print_list_of_obstacles();
                 break;
             default:
                 break;
@@ -132,6 +145,7 @@ void Display_menu()
     std::cout << "--------------------------------" << std::endl;
     std::cout << " a-add obstacle" << std::endl;
     std::cout << " e-remove obstacle" << std::endl;
+    std::cout << " p-print stored obstacles" << std::endl;
     std::cout << " m-show menu" << std::endl
               << std::endl;
     std::cout << " q-quit" << std::endl;

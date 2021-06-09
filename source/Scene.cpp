@@ -20,6 +20,24 @@ Scene::Scene()
     Link.Rysuj();
 }
 
+Scene::~Scene()
+{
+    if (!Obstacles.empty())
+    {
+        std::list<std::shared_ptr<SceneObject>>::iterator i;
+
+        i = Obstacles.begin();
+
+        for (int j = 0; j < Obstacles.size(); i++, j++)
+        {
+            (*i)->Remove_files_names(Link);
+            Obstacles.remove(*i);
+        }
+    }
+
+    remove(surface.c_str());
+}
+
 void Scene::Draw_surface(int x_min, int x_max, int y_min, int y_max)
 {
     std::ofstream Data_file;
@@ -416,6 +434,27 @@ bool Scene::Remove_obstacle(int index)
     Obstacles.remove(*i);
 
     Draw();
+
+    return true;
+}
+
+bool Scene::Print_list_of_obstacles()
+{
+    if (Obstacles.empty())
+    {
+        std::cerr << "Obstacles list is empty,no elements to print" << std::endl;
+        return false;
+    }
+    std::list<std::shared_ptr<SceneObject>>::iterator i;
+
+    i = Obstacles.begin();
+
+    std::cout << std::endl;
+
+    for (int j = 0; j < Obstacles.size(); i++, j++)
+    {
+        std::cout << " " << j << ". " << (*i)->Get_typeID() << " (" << (*i)->Get_position() << " )" << std::endl;
+    }
 
     return true;
 }

@@ -321,7 +321,7 @@ std::ostream &operator<<(std::ostream &os, const Vector<P, _size> &v)
     int i = 0;
 
     for (i; i < _size - 1; ++i)
-        os << v.Components[i] << "\t"; // separate each element with a tab
+        os << v.Components[i] << "   "; // separate each element with a tab
 
     os << v.Components[i]; // last element printed outside of the loop to avoid additional tab e.g. "x "
 

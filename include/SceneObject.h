@@ -28,6 +28,8 @@ public:
 
     virtual std::string Get_typeID() const;
 
+    virtual Vector3D Get_position() const;
+
     virtual std::string Get_file_path() const;
 
     bool Add_files_names(PzG::LaczeDoGNUPlota &Link, int colour);

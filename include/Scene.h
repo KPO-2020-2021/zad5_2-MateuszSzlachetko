@@ -32,9 +32,13 @@ private:
     void Draw_surface(int x_min, int x_max, int y_min, int y_max);
 
 public:
+    bool Print_list_of_obstacles();
+
     bool Add_obstacle();
 
     bool Remove_obstacle(int index);
+
+    ~Scene();
 
     /** @fn  Scene()
     *   @brief Default constructor

@@ -223,17 +223,17 @@ TEST(Vector, print)
 
     stream << v1;
 
-    EXPECT_EQ(stream.str(), "1\t1\t1");
+    EXPECT_EQ(stream.str(), "1   1   1");
     stream.str(std::string());
 
     stream << v2;
 
-    EXPECT_EQ(stream.str(), "1\t1\t5\t7\t-10\t0");
+    EXPECT_EQ(stream.str(), "1   1   5   7   -10   0");
     stream.str(std::string());
 
     stream << v3;
 
-    EXPECT_EQ(stream.str(), "-0.231\t0.5666\t1\t15");
+    EXPECT_EQ(stream.str(), "-0.231   0.5666   1   15");
     stream.str(std::string());
 }
 

@@ -31,6 +31,11 @@ std::string SceneObject::Get_file_path() const
     return std::string("No path specified for General object");
 }
 
+Vector3D SceneObject::Get_position() const
+{
+    return Vector3D();
+}
+
 std::string SceneObject::Get_typeID() const
 {
     return std::string("General object");
