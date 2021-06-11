@@ -28,10 +28,10 @@ Scene::~Scene()
 
         i = Obstacles.begin();
 
-        for (int j = 0; j < Obstacles.size(); i++, j++)
+        for (int j = 0; j < Obstacles.size(); j++, i++)
         {
+            std::cout << "Deleting " << (*i)->Get_file_path() << std::endl;
             (*i)->Remove_files_names(Link);
-            Obstacles.remove(*i);
         }
     }
 
@@ -332,7 +332,7 @@ bool Scene::Add_obstacle()
     std::cout << "Choose object type" << std::endl;
     std::cout << "1.\t Plateau" << std::endl;
     std::cout << "2.\t Round Mountain" << std::endl;
-    std::cout << "3.\t ---" << std::endl;
+    std::cout << "3.\t Pyramid" << std::endl;
     std::cout << std::endl;
 
     int Object_type = 0;
@@ -346,7 +346,7 @@ bool Scene::Add_obstacle()
         std::cerr << "Invalid object type" << std::endl;
         return false;
     }
-    double Radius, Length, Width, Height;
+    double Radius, Length, Width, Height, Side_Length;
     int colour;
     double x, y, orientation_angle;
 
@@ -421,6 +421,41 @@ bool Scene::Add_obstacle()
         }
     }
 
+    if (Object_type == 3)
+    {
+        std::cout << "Insert init values" << std::endl;
+        std::cout << "\t Side length: ";
+        std::cin >> Side_Length;
+        std::cout << "\t Height: ";
+        std::cin >> Height;
+        std::cout << "\t Colour: ";
+        std::cin >> colour;
+        std::cout << std::endl;
+
+        if ((Side_Length <= 0 || Height <= 0) || std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+            std::cerr << "Invalid init parameters" << std::endl;
+            return false;
+        }
+
+        std::cout << "Insert init position" << std::endl;
+        std::cout << "\t X- coordinate: ";
+        std::cin >> x;
+        std::cout << "\t Y- coordinate: ";
+        std::cin >> y;
+        std::cout << "\t Orientation angle: ";
+        std::cin >> orientation_angle;
+        std::cout << std::endl;
+
+        if (std::cin.fail())
+        {
+            std::cin.clear();
+            std::cin.ignore(1000, '\n');
+        }
+    }
+
     switch (Object_type)
     {
     case 1:
@@ -442,6 +477,19 @@ bool Scene::Add_obstacle()
         rm.Set_in_scene(x, y);
 
         Obstacles.push_back(std::make_shared<RoundMountain>(rm));
+
+        std::list<std::shared_ptr<SceneObject>>::iterator i;
+        i = Obstacles.end();
+        --i;
+        (*i)->Add_files_names(Link, colour);
+        break;
+    }
+    case 3:
+    {
+        Pyramid p(Side_Length, Height);
+        p.Set_in_scene(x, y, orientation_angle);
+
+        Obstacles.push_back(std::make_shared<Pyramid>(p));
 
         std::list<std::shared_ptr<SceneObject>>::iterator i;
         i = Obstacles.end();

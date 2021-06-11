@@ -4,6 +4,7 @@
 /** @file
  */
 
+#include "Pyramid.h"
 #include "RoundMountain.h"
 #include "Plateau.h"
 #include "Drone.h"
