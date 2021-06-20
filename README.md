@@ -5,7 +5,6 @@
 W celu zbudowania programu należy użyć poniższych komend
 
 ```bash
-    git submodule update --init --recursive
 		cd build && cmake ..
     make
 ```
@@ -31,3 +30,9 @@ W razie problemów proszę o kontakt <259370@student.pwr.edu.pl>
 ## Rozszerzenia
 
 Możliwość wyboru dowolnego z dostępnych kolorów dla wybranego drona.
+
+Możliwość wyboru dowolnego z dostępnych kolorów dla wybranej przeszkody.
+
+W przeszkodach w których ma to sens oprócz pozycji początkowej można podać kąt orientacji.
+
+Przeszkoda o podstawie zbliżonej do koła.
